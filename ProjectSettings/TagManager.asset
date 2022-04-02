@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerProjectile
+  - Enemy
+  - Ground
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Enemies
+    uniqueID: 1209671047
+    locked: 0
+  - name: Projectiles
+    uniqueID: 2443302839
     locked: 0

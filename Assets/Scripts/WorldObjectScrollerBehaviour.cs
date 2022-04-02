@@ -5,11 +5,13 @@ using UnityEngine;
 // Moves all objects in the list to specified direction
 public class WorldObjectScrollerBehaviour : MonoBehaviour
 {
-    public Vector3 ScrollDirection;
-    public List<Transform> Object;
+    //This is a global variable from perspective of player
+    public static Vector3 ScrollDirection;
+
+    public float ScrollDirectionMultiplier = 1f; //can be used to lower the rate of scroll
 
     public void Update()
     {
-        transform.position += ScrollDirection * Time.deltaTime;
+        transform.position += ScrollDirection * ScrollDirectionMultiplier * Time.deltaTime;
     }
 }
