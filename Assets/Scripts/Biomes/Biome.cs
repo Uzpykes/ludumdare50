@@ -16,6 +16,7 @@ public class Biome : MonoBehaviour
     [NonSerialized] public UnityEvent<Biome> OnBiomeVisible;
 
     [SerializeField] private float m_SpawnCooldown = 2f;
+    private float m_AdjustedSpawnCooldown;
     private float m_TimeSinceLastSpawn = 0f;
 
     [SerializeField] private Collider2D m_Collider;
@@ -40,12 +41,19 @@ public class Biome : MonoBehaviour
         m_TimeSinceLastSpawn += Time.deltaTime;
 
         UpdateSpawnPoints();
+        CalculateAdjustedSpawnCooldown();
 
-        if (m_TimeSinceLastSpawn > m_SpawnCooldown)
+        if (m_TimeSinceLastSpawn > m_AdjustedSpawnCooldown)
         {
+            Debug.Log($"Adjusted spawn rate: {m_AdjustedSpawnCooldown}");
             SpawnGroundEnemy();
             SpawnFloatingEnemy();
         }
+    }
+
+    private void CalculateAdjustedSpawnCooldown()
+    {
+        m_AdjustedSpawnCooldown = Mathf.Max(1f, m_SpawnCooldown - PlayerStatsManager.Instance.GlobalDifficultyMultiplier); 
     }
 
 
@@ -96,7 +104,7 @@ public class Biome : MonoBehaviour
         if (!m_GroundSpawnPoint.gameObject.activeSelf)
             return;
 
-        var enemy = Instantiate(m_BiomeGroundEnemies[0], m_GroundSpawnPoint.position + Vector3.up, Quaternion.identity, this.transform);
+        var enemy = Instantiate(m_BiomeGroundEnemies[UnityEngine.Random.Range(0, m_BiomeGroundEnemies.Count)], m_GroundSpawnPoint.position + Vector3.up, Quaternion.identity, this.transform.parent);
             OnBiomeVisible.AddListener(enemy.HandleVisible);
 
         m_TimeSinceLastSpawn = 0f;
@@ -107,7 +115,7 @@ public class Biome : MonoBehaviour
         if (!m_AirSpawnPoint.gameObject.activeSelf)
             return;
 
-        var enemy = Instantiate(m_BiomeFloatingEnemies[0], m_AirSpawnPoint.position + (Vector3.up * UnityEngine.Random.Range(-3f, 3f)), Quaternion.identity, this.transform);
+        var enemy = Instantiate(m_BiomeFloatingEnemies[UnityEngine.Random.Range(0, m_BiomeFloatingEnemies.Count)], m_AirSpawnPoint.position + (Vector3.up * UnityEngine.Random.Range(-3f, 3f)), Quaternion.identity, this.transform.parent);
 
         OnBiomeVisible.AddListener(enemy.HandleVisible);
         m_TimeSinceLastSpawn = 0f;

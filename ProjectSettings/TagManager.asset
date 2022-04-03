@@ -15,7 +15,7 @@ TagManager:
   - PlayerProjectile
   - Enemy
   - Ground
-  - 
+  - MinigameTrigger
   - 
   - 
   - 
@@ -40,6 +40,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Buldings
+    uniqueID: 598427947
+    locked: 0
+  - name: Player
+    uniqueID: 2129357363
     locked: 0
   - name: Enemies
     uniqueID: 1209671047

@@ -45,7 +45,11 @@ public class BalloonBehaviour : MonoBehaviour
     [SerializeField] private float m_VerticalSpeedUpperBound;
     [SerializeField] private float m_VerticalSpeedLowerBound;
 
-    private bool m_IsGrounded = false;
+    private bool m_IsGrounded
+    {
+        get => PlayerStatsManager.Instance.IsLanded;
+        set => PlayerStatsManager.Instance.IsLanded = value;
+    }
 
     private bool m_AddedHeatThisFrame = false;
 
@@ -105,7 +109,7 @@ public class BalloonBehaviour : MonoBehaviour
     private void HandleInput()
     {
         m_AddedHeatThisFrame = false;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.D))
             DropWeight();
 
         if (Input.GetKey(KeyCode.H))
@@ -113,6 +117,9 @@ public class BalloonBehaviour : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
             ReleaseHeat();
+
+        if (Input.GetKeyDown(KeyCode.T))
+            PlayerStatsManager.Instance.MaxFuel += 10;
     }
 
     // Just remove some weight

@@ -6,9 +6,9 @@ public class PlayerShootingBehaviour : MonoBehaviour
 {
     [SerializeField] private Transform m_ShootingPoint;
     [SerializeField] private Projectile m_ProjectilePrefab;
-    [SerializeField] private float m_ProjectileSpeed; // should be upgradeable
+    [SerializeField] private float m_ProjectileSpeed;
 
-    [SerializeField] private float m_ShootingCooldown; // should be upgradeable
+    [SerializeField] private float m_ShootingCooldown;
     private float m_TimeSinceLastShot;
 
     private void Update()
@@ -23,6 +23,25 @@ public class PlayerShootingBehaviour : MonoBehaviour
         {
             SpawnProjectile();
         }
+
+        if (Input.mouseScrollDelta.y > 0f)
+        {
+            PreviousWeapon();
+        }
+        else if (Input.mouseScrollDelta.y < 0f)
+        {
+            NextWeapon();
+        }
+    }
+
+    private void NextWeapon()
+    {
+        PlayerWeaponManager.Instance.ActiveWeapon = PlayerWeaponManager.Instance.ActiveWeapon.Next();
+    }
+
+    private void PreviousWeapon()
+    {
+        PlayerWeaponManager.Instance.ActiveWeapon = PlayerWeaponManager.Instance.ActiveWeapon.Previous();
     }
 
     private void SpawnProjectile()

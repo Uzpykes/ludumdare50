@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class BiomeManager : MonoBehaviour
 {
     [SerializeField] List<Biome> m_BiomePrefabs;
+    [SerializeField] Transform m_EnemyHolder;
 
     private void Start()
     {
