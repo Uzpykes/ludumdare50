@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
     {
         if (m_CanAttackPlayer)
             Attack();
+
+        m_TimeSinceLastAttack += Time.deltaTime;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -37,6 +39,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             m_CanAttackPlayer = false;
+            Debug.Log("did an exit");
         }
     }
 
@@ -44,6 +47,7 @@ public class Enemy : MonoBehaviour
     {
         if (m_TimeSinceLastAttack > m_AttackCooldown)
         {
+            Debug.Log("Attacking!");
             m_Animator.SetTrigger("Attack");
             PlayerHealthManager.OnAttacked.Invoke(4f);
 

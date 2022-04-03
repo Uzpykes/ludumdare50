@@ -22,14 +22,30 @@ public class BalloonBehaviour : MonoBehaviour
         set => PlayerStatsManager.Instance.Fuel = value;
     }
 
+    private float m_VerticalSpeed
+    {
+        get => PlayerStatsManager.Instance.VerticalSpeed;
+        set => PlayerStatsManager.Instance.VerticalSpeed = value;
+    }
+
+    private float m_HeatEfficency
+    {
+        get => PlayerStatsManager.Instance.HeatEfficency;
+    }
+
+    private float m_FuelUseRate
+    {
+        get => PlayerStatsManager.Instance.FuelUseRate;
+    }
 
 
     [SerializeField] private float m_HeatDecayRate;
     [SerializeField] private float m_HeatFromFuelRate;
 
-    private float m_VerticalSpeed;
     [SerializeField] private float m_VerticalSpeedUpperBound;
     [SerializeField] private float m_VerticalSpeedLowerBound;
+
+    private bool m_IsGrounded = false;
 
     private bool m_AddedHeatThisFrame = false;
 
@@ -67,17 +83,16 @@ public class BalloonBehaviour : MonoBehaviour
 
     private void MoveVertically()
     {
-        transform.position += new Vector3(0, m_VerticalSpeed * Time.deltaTime);
+        var vSpeed = new Vector3(0, m_VerticalSpeed * Time.deltaTime);
+        if (m_IsGrounded && vSpeed.y < 0f)
+            vSpeed.y = 0f;
+        transform.position += vSpeed;
     }
 
     //Compares weight and heat and decides which way the balloon is moving and how fast
     private void UpdateVerticalSpeed()
     {
-        var dif = (m_Heat - m_Weight);
-        if (dif > 0f) // if heat is higher than weight, then loose speed faster
-            dif *= 3f;
-        else
-            dif /= 2f;
+        var dif = ((m_Heat * m_HeatEfficency) - m_Weight) / 2f;
 
         m_VerticalSpeed = dif * .1f; // To move up you need to have heat higher than your weight.
 
@@ -116,9 +131,9 @@ public class BalloonBehaviour : MonoBehaviour
         m_AddedHeatThisFrame = true;
 
         m_Heat += m_HeatFromFuelRate * Time.deltaTime;
-        if (m_Heat > 100f) m_Heat = 100f;
+        if (m_Heat > PlayerStatsManager.Instance.MaxHeat) m_Heat = 100f;
 
-        m_Fuel -= 1f * Time.deltaTime;
+        m_Fuel -= m_FuelUseRate * Time.deltaTime;
         if (m_Fuel < 0f) m_Fuel = 0f;
     }
 
@@ -126,6 +141,24 @@ public class BalloonBehaviour : MonoBehaviour
     {
         m_Heat -= 5f;
         if (m_Heat < 0f) m_Heat = 0f;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            m_IsGrounded = true;
+            WorldObjectScrollerBehaviour.ScrollDirection = Vector3.zero;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            m_IsGrounded = false;
+            WorldObjectScrollerBehaviour.ScrollDirection = new Vector3(-1, 0, 0);
+        }
     }
 
 }

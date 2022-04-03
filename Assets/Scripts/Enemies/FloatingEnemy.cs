@@ -9,6 +9,8 @@ public class FloatingEnemy : Enemy
     private float m_InitialHeight;
     private float m_TimeSinceSpawn;
 
+    [SerializeField] private float m_FloatSpeed;
+
     protected override void Awake()
     {
         m_InitialHeight = transform.position.y;
@@ -19,7 +21,6 @@ public class FloatingEnemy : Enemy
     protected override void Update()
     {
         m_TimeSinceSpawn += Time.deltaTime;
-        m_TimeSinceLastAttack += Time.deltaTime;
 
         Float();
         base.Update();
@@ -32,6 +33,6 @@ public class FloatingEnemy : Enemy
 
         newY = m_InitialHeight + (newY * m_Floatiness);
 
-        transform.position = new Vector3(transform.position.x, newY);
+        transform.position = new Vector3(transform.position.x - (m_FloatSpeed * Time.deltaTime), newY);
     }
 }

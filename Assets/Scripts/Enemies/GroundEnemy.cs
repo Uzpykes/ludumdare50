@@ -20,7 +20,8 @@ public class GroundEnemy : Enemy
     {
         base.Update();
 
-        ChacePlayer();
+        if (!m_CanAttackPlayer)
+            ChacePlayer();
     }
 
 

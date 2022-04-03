@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 439676731}
   - component: {fileID: 439676734}
   - component: {fileID: 2938887938139076095}
+  - component: {fileID: -5102374186705243704}
   m_Layer: 8
   m_Name: zombie_floating_1
   m_TagString: Untagged
@@ -249,9 +250,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d82b4f5777b4104faf7e57749562edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_AttackCooldown: 1
   m_Floatiness: 2.5
   m_FloatinessRate: 1
-  m_AttackCooldown: 1
+  m_FloatSpeed: 1
 --- !u!114 &439676734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,3 +279,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb9a041627e25849b1fff7ae0617618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5102374186705243704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193875033222278016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57312ed37296e6645b8a8aecea1fee7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Collider: {fileID: 439676733}
