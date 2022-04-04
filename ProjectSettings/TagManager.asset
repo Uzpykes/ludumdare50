@@ -16,8 +16,8 @@ TagManager:
   - Enemy
   - Ground
   - MinigameTrigger
-  - 
-  - 
+  - Grenade
+  - DeadEnemy
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Projectiles
     uniqueID: 2443302839
+    locked: 0
+  - name: Explosions
+    uniqueID: 4028488891
     locked: 0

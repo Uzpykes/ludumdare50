@@ -15,6 +15,11 @@ public class BiomeManager : MonoBehaviour
 
         var instance = Instantiate(firstBiome, Vector3.zero, Quaternion.identity, this.transform);
         instance.OnBiomeVisible.AddListener(SpawnBiome);
+
+        GameOverManager.Instance.OnGameOver.AddListener(() =>
+        {
+            this.gameObject.SetActive(false);
+        });
     }
 
     private void SpawnBiome(Biome previous)

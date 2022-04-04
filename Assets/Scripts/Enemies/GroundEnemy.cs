@@ -35,8 +35,8 @@ public class GroundEnemy : Enemy
     {
         base.OnTriggerEnter2D(collision);
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-            Debug.Log("Here!");
+        //if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        //    Debug.Log("Here!");
     }
 
 }

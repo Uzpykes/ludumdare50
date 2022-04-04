@@ -19,12 +19,13 @@ public class PlayerWeaponManager : MonoBehaviour
     [SerializeField] private int m_RocketLauncherAmmo;
     [SerializeField] private int m_GrenadeAmmo;
 
-    public int HandgunAmmo { get => m_HandgunAmmo; set { m_HandgunAmmo = value; } }
-    public int MachinegunAmmo { get => m_MachinegunAmmo; set { m_MachinegunAmmo = value; } }
-    public int RocketLauncherAmmo { get => m_RocketLauncherAmmo; set { m_RocketLauncherAmmo = value; } }
-    public int GrenadeAmmo { get => m_GrenadeAmmo; set { m_GrenadeAmmo = value; } }
+    public int HandgunAmmo { get => m_HandgunAmmo; set { m_HandgunAmmo = value; OnAmmoCountChanged.Invoke(WeaponType.Handgun, value); } }
+    public int MachinegunAmmo { get => m_MachinegunAmmo; set { m_MachinegunAmmo = value; OnAmmoCountChanged.Invoke(WeaponType.Machinegun, value); } }
+    public int RocketLauncherAmmo { get => m_RocketLauncherAmmo; set { m_RocketLauncherAmmo = value; OnAmmoCountChanged.Invoke(WeaponType.RocketLauncher, value); } }
+    public int GrenadeAmmo { get => m_GrenadeAmmo; set { m_GrenadeAmmo = value; OnAmmoCountChanged.Invoke(WeaponType.Grenade, value); } }
 
     [NonSerialized] public UnityEvent<WeaponType> OnActiveWeaponChanged;
+    [NonSerialized] public UnityEvent<WeaponType, int> OnAmmoCountChanged;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class PlayerWeaponManager : MonoBehaviour
     private void CreateEvents()
     {
         OnActiveWeaponChanged = new UnityEvent<WeaponType>();
+        OnAmmoCountChanged = new UnityEvent<WeaponType, int>();
     }
 }
 

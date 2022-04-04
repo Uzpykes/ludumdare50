@@ -38,6 +38,8 @@ public class BalloonBehaviour : MonoBehaviour
         get => PlayerStatsManager.Instance.FuelUseRate;
     }
 
+    private float m_AtmosphereSoundRate = 3f;
+    private float m_TimeSinceLastSound = 0f;
 
     [SerializeField] private float m_HeatDecayRate;
     [SerializeField] private float m_HeatFromFuelRate;
@@ -53,16 +55,20 @@ public class BalloonBehaviour : MonoBehaviour
 
     private bool m_AddedHeatThisFrame = false;
 
-    private void OnGUI()
-    {
-        GUILayout.Label($"Heat: {m_Heat}");
-        GUILayout.Label($"Weight: {m_Weight}");
-        GUILayout.Label($"Vertical Speed: {m_VerticalSpeed}");
-    }
+    //private void OnGUI()
+    //{
+    //    GUILayout.Label($"Heat: {m_Heat}");
+    //    GUILayout.Label($"Weight: {m_Weight}");
+    //    GUILayout.Label($"Vertical Speed: {m_VerticalSpeed}");
+    //}
 
     private void Start()
     {
         WorldObjectScrollerBehaviour.ScrollDirection = new Vector3(-1, 0, 0);
+        GameOverManager.Instance.OnGameOver.AddListener(() =>
+        {
+            this.gameObject.SetActive(false);
+        });
     }
 
     private void Update()
@@ -75,6 +81,14 @@ public class BalloonBehaviour : MonoBehaviour
         UpdateVerticalSpeed();
 
         MoveVertically();
+
+        m_TimeSinceLastSound += Time.deltaTime;
+        if (m_TimeSinceLastSound > m_AtmosphereSoundRate)
+        {
+            m_TimeSinceLastSound = UnityEngine.Random.Range(-1f, 0f);
+            AudioManager.Instance.PlayRandomAtmosphereClip();
+
+        }
     }
 
 

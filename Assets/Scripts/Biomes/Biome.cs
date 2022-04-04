@@ -8,6 +8,7 @@ public class Biome : MonoBehaviour
 {
     [SerializeField] private Transform m_GroundSpawnPoint; // stays just outside the camera view while the biome is moving
     [SerializeField] private Transform m_AirSpawnPoint;
+    [SerializeField] private Transform m_PointOfInterest;
 
     public List<FloatingEnemy> m_BiomeFloatingEnemies;
     public List<GroundEnemy> m_BiomeGroundEnemies;
@@ -15,9 +16,16 @@ public class Biome : MonoBehaviour
     [NonSerialized] public UnityEvent<Biome> OnBiomeDestroyed;
     [NonSerialized] public UnityEvent<Biome> OnBiomeVisible;
 
-    [SerializeField] private float m_SpawnCooldown = 2f;
-    private float m_AdjustedSpawnCooldown;
-    private float m_TimeSinceLastSpawn = 0f;
+    [SerializeField] private float m_GroundSpawnCooldown = 2f;
+    [SerializeField] private float m_AirSpawnCooldown = 5f;
+
+    private float m_AdjustedGroundSpawnCooldown;
+    private float m_AdjustedAirSpawnCooldown;
+    private float m_TimeSinceLastGroundSpawn = 0f;
+    private float m_TimeSinceLastAirSpawn = 0f;
+
+    [SerializeField] private List<MinigameTrigger> m_MinigamePrefabs;
+    private bool m_MinigameSpawned;
 
     [SerializeField] private Collider2D m_Collider;
     public float StartOffset => transform.position.x - m_Collider.bounds.min.x;
@@ -33,27 +41,47 @@ public class Biome : MonoBehaviour
         m_GroundSpawnPoint.gameObject.SetActive(false);
     }
 
+    private void Start()
+    {
+        GameOverManager.Instance.OnGameOver.AddListener(() =>
+        {
+            this.gameObject.SetActive(false);
+        });
+    }
+
     private void Update()
     {
         if (IsVisible())
             OnBiomeVisible.Invoke(this);
 
-        m_TimeSinceLastSpawn += Time.deltaTime;
+        m_TimeSinceLastGroundSpawn += Time.deltaTime;
+        m_TimeSinceLastAirSpawn += Time.deltaTime;
 
         UpdateSpawnPoints();
         CalculateAdjustedSpawnCooldown();
 
-        if (m_TimeSinceLastSpawn > m_AdjustedSpawnCooldown)
+        if (m_TimeSinceLastGroundSpawn > m_AdjustedGroundSpawnCooldown)
         {
-            Debug.Log($"Adjusted spawn rate: {m_AdjustedSpawnCooldown}");
             SpawnGroundEnemy();
+        }
+
+        if (m_TimeSinceLastAirSpawn > m_AdjustedAirSpawnCooldown)
+        {
             SpawnFloatingEnemy();
+        }
+
+        if (m_MinigameSpawned == false)
+        {
+            m_MinigameSpawned = true;
+            SpawnMinigame();
         }
     }
 
     private void CalculateAdjustedSpawnCooldown()
     {
-        m_AdjustedSpawnCooldown = Mathf.Max(1f, m_SpawnCooldown - PlayerStatsManager.Instance.GlobalDifficultyMultiplier); 
+        m_AdjustedGroundSpawnCooldown = Mathf.Max(1f, m_GroundSpawnCooldown - PlayerStatsManager.Instance.GlobalDifficultyMultiplier);
+
+        m_AdjustedAirSpawnCooldown = Mathf.Max(3f, m_AirSpawnCooldown - PlayerStatsManager.Instance.GlobalDifficultyMultiplier);
     }
 
 
@@ -107,7 +135,7 @@ public class Biome : MonoBehaviour
         var enemy = Instantiate(m_BiomeGroundEnemies[UnityEngine.Random.Range(0, m_BiomeGroundEnemies.Count)], m_GroundSpawnPoint.position + Vector3.up, Quaternion.identity, this.transform.parent);
             OnBiomeVisible.AddListener(enemy.HandleVisible);
 
-        m_TimeSinceLastSpawn = 0f;
+        m_TimeSinceLastGroundSpawn = UnityEngine.Random.Range(-1f, 1f); //hacky way to randomize spawn time
     }
 
     private void SpawnFloatingEnemy()
@@ -118,8 +146,14 @@ public class Biome : MonoBehaviour
         var enemy = Instantiate(m_BiomeFloatingEnemies[UnityEngine.Random.Range(0, m_BiomeFloatingEnemies.Count)], m_AirSpawnPoint.position + (Vector3.up * UnityEngine.Random.Range(-3f, 3f)), Quaternion.identity, this.transform.parent);
 
         OnBiomeVisible.AddListener(enemy.HandleVisible);
-        m_TimeSinceLastSpawn = 0f;
+        m_TimeSinceLastAirSpawn = UnityEngine.Random.Range(-1f, 1f); //hacky way to randomize spawn time
+    }
 
+    private void SpawnMinigame()
+    {
+        var randomMinigame = m_MinigamePrefabs[UnityEngine.Random.Range(0, m_MinigamePrefabs.Count)];
+
+        Instantiate(randomMinigame, m_PointOfInterest.position, Quaternion.identity, this.transform.parent);
     }
 
     private void EnableSpawnPointsWhenVisible(Biome biome)

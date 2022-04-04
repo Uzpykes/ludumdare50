@@ -27,7 +27,7 @@ SpriteAtlas:
       blockOffset: 1
       allowAlphaSplitting: 0
       enableRotation: 1
-      enableTightPacking: 1
+      enableTightPacking: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
@@ -199,6 +199,7 @@ SpriteAtlas:
   - {fileID: -6796350143409936683, guid: 315ec72930eeaea479c68428df6aecb7, type: 3}
   - {fileID: 3781946483862830510, guid: 1ca949aa424293242a4ad1f47a0b9434, type: 3}
   - {fileID: 3499272959063439820, guid: 1ca949aa424293242a4ad1f47a0b9434, type: 3}
+  - {fileID: 4369572136041557648, guid: 8cbacc4b7e7cacb48be36284c5873078, type: 3}
   - {fileID: 8076639920094678083, guid: 1ba3f87cd69cad642885957591e44e64, type: 3}
   - {fileID: 8500230150788015530, guid: 1ba3f87cd69cad642885957591e44e64, type: 3}
   - {fileID: 3708420142507668155, guid: 1ba3f87cd69cad642885957591e44e64, type: 3}
@@ -447,6 +448,7 @@ SpriteAtlas:
   - inventory-items_8
   - balloon_1
   - balloon_0
+  - title_0
   - zombie_sprites_63
   - zombie_sprites_62
   - zombie_sprites_61

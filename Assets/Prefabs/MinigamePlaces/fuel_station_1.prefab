@@ -553,15 +553,19 @@ MonoBehaviour:
     Prizes:
     - Location: 0.5
       Prize: {fileID: 11400000, guid: 18651dc656cdb6e46972e916f9541b97, type: 2}
+    - Location: 0.75
+      Prize: {fileID: 11400000, guid: af2196858cc4bfe4bbd89a64aef1d775, type: 2}
   - TimeToEnd: 5
     Prizes:
     - Location: 0.3
       Prize: {fileID: 11400000, guid: f4ed0350dfe372c44883d512fc382d17, type: 2}
-  - TimeToEnd: 1
+    - Location: 0.65
+      Prize: {fileID: 11400000, guid: 132a252ec6005754aa8f12e374c27916, type: 2}
+  - TimeToEnd: 1.2
     Prizes:
     - Location: 0.7
       Prize: {fileID: 11400000, guid: f4ed0350dfe372c44883d512fc382d17, type: 2}
-    - Location: 0.2
+    - Location: 0.3
       Prize: {fileID: 11400000, guid: e62b2cc16ca928241a7c725937335a56, type: 2}
 --- !u!1 &6174500392382356301
 GameObject:

@@ -33,6 +33,18 @@ public class PlayerUpgradeBehaviour : MonoBehaviour
             case PrizeType.Survivor:
                 //TODO add
                 break;
+            case PrizeType.GrenadeAmmo:
+                PlayerWeaponManager.Instance.GrenadeAmmo += prizeEntry.ValueChange;
+                break;
+            case PrizeType.HandgunAmmo:
+                PlayerWeaponManager.Instance.HandgunAmmo += prizeEntry.ValueChange;
+                break;
+            case PrizeType.MachinegunAmmo:
+                PlayerWeaponManager.Instance.MachinegunAmmo += prizeEntry.ValueChange;
+                break;
+            case PrizeType.RocketlauncherAmmo:
+                PlayerWeaponManager.Instance.RocketLauncherAmmo += prizeEntry.ValueChange;
+                break;
         }
 
 

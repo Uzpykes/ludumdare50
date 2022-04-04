@@ -354,8 +354,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShootingPoint: {fileID: 2140624148}
   m_ProjectilePrefab: {fileID: 5775233409828091142, guid: f58a6f0a5f495a448ab99d40071fcce2, type: 3}
-  m_ProjectileSpeed: 10
-  m_ShootingCooldown: 1
+  m_RocketPrefab: {fileID: 5775233409828091142, guid: e514720ea90bc8443b9f3da444e653c3, type: 3}
+  m_GrenadePrefab: {fileID: 5775233409828091142, guid: 1759f8dc9394c7a41992a872bfd0f371, type: 3}
+  m_HandgunCooldown: 1.5
+  m_MachinegunCooldown: 0.15
+  m_RocketlauncherCooldown: 3
+  m_GrenadeCooldown: 2
 --- !u!114 &6818666986233875277
 MonoBehaviour:
   m_ObjectHideFlags: 0

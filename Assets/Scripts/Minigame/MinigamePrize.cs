@@ -18,7 +18,11 @@ public enum PrizeType
     MaxFuel,
     Fuel,
     Health,
-    FuelEfficency
+    FuelEfficency,
+    HandgunAmmo,
+    MachinegunAmmo,
+    RocketlauncherAmmo,
+    GrenadeAmmo
 }
 
 [System.Serializable]

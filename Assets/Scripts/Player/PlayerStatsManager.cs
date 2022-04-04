@@ -26,6 +26,9 @@ public class PlayerStatsManager : MonoBehaviour
     [SerializeField] private InventoryItem SandBag;
     [SerializeField] private InventoryItem Crew;
 
+    private int m_ZombiesKilled;
+    private float m_DistanceTraveled;
+
     public float MaxHealth { get => m_MaxHealth; set => m_MaxHealth = value; }
     public float Health { get => m_Health; set { m_Health = value; OnHealthChanged.Invoke(value); } }
     public float MaxHeat { get => m_MaxHeat; set => m_MaxHeat = value; }
@@ -41,12 +44,18 @@ public class PlayerStatsManager : MonoBehaviour
     public bool IsLanded { get => m_IsLanded; set => m_IsLanded = value; }
     public float GlobalDifficultyMultiplier { get => m_GlobalDifficultyMultiplier; set => m_GlobalDifficultyMultiplier = value; }
 
+    public int ZombiesKilled { get => m_ZombiesKilled; set { m_ZombiesKilled = value; OnZombiesKilled.Invoke(value); } }
+
+    public float DistanceTraveled { get => m_DistanceTraveled; set { m_DistanceTraveled = value; OnDistanceTraveledChanged.Invoke(value); } }
+
     [NonSerialized] public UnityEvent<float> OnHealthChanged;
     [NonSerialized] public UnityEvent<float> OnHeatChanged;
     [NonSerialized] public UnityEvent<float> OnWeightChanged;
     [NonSerialized] public UnityEvent<float> OnFuelChanged;
     [NonSerialized] public UnityEvent<float> OnMaxFuelChanged;
     [NonSerialized] public UnityEvent<float> OnVerticalSpeedChanged;
+    [NonSerialized] public UnityEvent<int> OnZombiesKilled;
+    [NonSerialized] public UnityEvent<float> OnDistanceTraveledChanged;
 
     private void Awake()
     {
@@ -69,6 +78,8 @@ public class PlayerStatsManager : MonoBehaviour
         OnFuelChanged = new UnityEvent<float>();
         OnMaxFuelChanged = new UnityEvent<float>();
         OnVerticalSpeedChanged = new UnityEvent<float>();
+        OnZombiesKilled = new UnityEvent<int>();
+        OnDistanceTraveledChanged = new UnityEvent<float>();
     }
 
 

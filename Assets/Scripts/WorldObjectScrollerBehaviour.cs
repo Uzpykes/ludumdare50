@@ -13,5 +13,6 @@ public class WorldObjectScrollerBehaviour : MonoBehaviour
     public void Update()
     {
         transform.position += ScrollDirection * ScrollDirectionMultiplier * Time.deltaTime;
+        PlayerStatsManager.Instance.DistanceTraveled += (ScrollDirection.x * -1 ) * Time.deltaTime;
     }
 }

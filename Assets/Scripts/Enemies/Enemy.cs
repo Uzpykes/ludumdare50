@@ -17,6 +17,14 @@ public class Enemy : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
+    private void Start()
+    {
+        GameOverManager.Instance.OnGameOver.AddListener(() =>
+        {
+            this.gameObject.SetActive(false);
+        });
+    }
+
     protected virtual void Update()
     {
         if (m_CanAttackPlayer)
@@ -47,7 +55,7 @@ public class Enemy : MonoBehaviour
     {
         if (m_TimeSinceLastAttack > m_AttackCooldown)
         {
-            Debug.Log("Attacking!");
+            AudioManager.Instance.PlayRandomZombieAttackClip();
             m_Animator.SetTrigger("Attack");
             PlayerHealthManager.OnAttacked.Invoke(4f);
 
