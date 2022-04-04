@@ -373,7 +373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: H
+  m_text: Q
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -690,7 +690,6 @@ GameObject:
   m_Component:
   - component: {fileID: 216802154}
   - component: {fileID: 216802156}
-  - component: {fileID: 216802155}
   m_Layer: 5
   m_Name: Controls
   m_TagString: Untagged
@@ -719,20 +718,6 @@ RectTransform:
   m_AnchoredPosition: {x: 401.36, y: 74.29999}
   m_SizeDelta: {x: -802.72, y: 148.4035}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &216802155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216802153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c896dd89e4b53445809b53f03fe5c8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ZombieKillsText: {fileID: 0}
-  m_MetersTraveledText: {fileID: 0}
 --- !u!222 &216802156
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1924,7 +1909,6 @@ GameObject:
   - component: {fileID: 754104539}
   - component: {fileID: 754104542}
   - component: {fileID: 754104541}
-  - component: {fileID: 754104540}
   m_Layer: 5
   m_Name: Weapon
   m_TagString: Untagged
@@ -1952,34 +1936,6 @@ RectTransform:
   m_AnchoredPosition: {x: 846.42883, y: -65.025955}
   m_SizeDelta: {x: 484.2566, y: 136}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &754104540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754104538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ad97ee2a8c2a7499d422768f7a91a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_WeaponSprites:
-  - Type: 0
-    WeaponIcon: {fileID: 4202938828118557322, guid: ee906dd555ea07a498847f73fe002fb3, type: 3}
-    AmmoIcon: {fileID: 7627503616358371109, guid: ee906dd555ea07a498847f73fe002fb3, type: 3}
-  - Type: 1
-    WeaponIcon: {fileID: 3876512272233767631, guid: ee906dd555ea07a498847f73fe002fb3, type: 3}
-    AmmoIcon: {fileID: 8890533060992490834, guid: ee906dd555ea07a498847f73fe002fb3, type: 3}
-  - Type: 2
-    WeaponIcon: {fileID: -5166432130525955749, guid: ee906dd555ea07a498847f73fe002fb3, type: 3}
-    AmmoIcon: {fileID: -4956809556694966118, guid: ee906dd555ea07a498847f73fe002fb3, type: 3}
-  - Type: 3
-    WeaponIcon: {fileID: 2189712646507832853, guid: ee906dd555ea07a498847f73fe002fb3, type: 3}
-    AmmoIcon: {fileID: -1414468336072662494, guid: ee906dd555ea07a498847f73fe002fb3, type: 3}
-  m_WeaponSprite: {fileID: 0}
-  m_WeaponAmmoSprite: {fileID: 0}
-  m_AmmoCountText: {fileID: 0}
 --- !u!114 &754104541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2337,7 +2293,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 0}
+  m_BackGroundColor: {r: 0.8235294, g: 1, b: 1, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3330,7 +3286,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: D
+  m_text: E
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6977,7 +6933,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: F
+  m_text: W
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

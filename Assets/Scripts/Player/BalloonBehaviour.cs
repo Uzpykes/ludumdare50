@@ -105,6 +105,9 @@ public class BalloonBehaviour : MonoBehaviour
         if (m_IsGrounded && vSpeed.y < 0f)
             vSpeed.y = 0f;
         transform.position += vSpeed;
+        //cap height
+        if (transform.position.y > 14)
+            transform.position = new Vector3(transform.position.x, 14);
     }
 
     //Compares weight and heat and decides which way the balloon is moving and how fast
@@ -123,17 +126,15 @@ public class BalloonBehaviour : MonoBehaviour
     private void HandleInput()
     {
         m_AddedHeatThisFrame = false;
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.E))
             DropWeight();
 
-        if (Input.GetKey(KeyCode.H))
+        if (Input.GetKey(KeyCode.Q))
             AddHeat();
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.W))
             ReleaseHeat();
 
-        if (Input.GetKeyDown(KeyCode.T))
-            PlayerStatsManager.Instance.MaxFuel += 10;
     }
 
     // Just remove some weight
